@@ -1,9 +1,6 @@
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/bars_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/circular_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/fl_charts_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-
 import '../../presentation/screens/fl_charts/lineal_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
