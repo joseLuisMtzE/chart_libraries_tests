@@ -1,0 +1,22 @@
+name: chart_libraries_tests
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  fl_chart: ^0.69.0
+  flutter:
+    sdk: flutter
+  go_router: ^14.3.0
+  graphic: ^2.5.0
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
