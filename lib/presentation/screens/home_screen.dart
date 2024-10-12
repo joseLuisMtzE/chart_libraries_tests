@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, String>> data = [
       {"title": "FL Charts", 'route': '/fl-charts'},
+      {"title": "FL Charts zoom", 'route': '/fl-charts-zoom'},
     ];
 
     return Scaffold(
