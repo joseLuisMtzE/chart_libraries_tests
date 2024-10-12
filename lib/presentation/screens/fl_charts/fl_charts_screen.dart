@@ -10,6 +10,7 @@ class FlChartsScreen extends StatelessWidget {
       {"title": "Lineal", 'route': '/fl-lineal'},
       {"title": "Circular", 'route': '/fl-circular'},
       {"title": "Bars", 'route': '/fl-bars'},
+      {"title": "Custom Lineal", 'route': '/custom-lineal'},
     ];
 
     return Scaffold(
