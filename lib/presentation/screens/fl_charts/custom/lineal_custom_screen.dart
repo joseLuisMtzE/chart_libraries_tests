@@ -88,7 +88,7 @@ class _ChartView extends StatelessWidget {
   LineTouchData get lineTouchData => LineTouchData(
         // enabled: false,
         touchTooltipData: LineTouchTooltipData(
-          getTooltipColor: (touchedSpot) => Colors.orange.withOpacity(1),
+          getTooltipColor: (touchedSpot) => Colors.grey.withOpacity(.05),
         ),
       );
 

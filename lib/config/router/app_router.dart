@@ -1,5 +1,6 @@
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/bars_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/circular_fl_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/fl_charts/custom/circular_custom_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/custom/lineal_custom_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/fl_charts_screen.dart';
 import '../../presentation/screens/fl_charts/lineal_fl_screen.dart';
@@ -33,6 +34,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/custom-lineal',
       builder: (context, state) => LinealCustomScreen(),
+    ),
+    GoRoute(
+      path: '/custom-circular',
+      builder: (context, state) => CircularCustomScreen(),
     ),
   ],
 );
