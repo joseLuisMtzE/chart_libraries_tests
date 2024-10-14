@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:chart_libraries_tests/helpers/human_formats.dart'; 
-
+import 'package:chart_libraries_tests/helpers/human_formats.dart';
+import 'package:chart_libraries_tests/helpers/zoomable_widget.dart'; 
 class FlChartsZoomScreen extends StatefulWidget {
   const FlChartsZoomScreen({super.key});
 
@@ -77,99 +77,102 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                   height: 10,
                 ),
                 Expanded(
-                  child: BarChart(
-                    BarChartData(
-                      alignment: BarChartAlignment.spaceEvenly, 
-                      maxY: 8000, 
-                      barTouchData: BarTouchData(
-                        touchTooltipData: BarTouchTooltipData(
-                          tooltipBorder: BorderSide(color: Colors.blueGrey, width: 2),
-                          tooltipRoundedRadius: 8,
-                          tooltipPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          tooltipMargin: 16,
-                          tooltipHorizontalAlignment: FLHorizontalAlignment.center,
-                          maxContentWidth: 120,
-                          getTooltipColor: (group) => Colors.grey.withOpacity(0.8),
-                          getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                            String year = group.x == 0 ? '2023' : '2024';
-                            return BarTooltipItem(
-                              '$year\n\$${rod.toY}',
-                              const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            );
+                  child: ZoomableWidget(
+                    minScale: 1.0,
+                    maxScale: 4.0,
+                    child: BarChart(
+                      BarChartData(
+                        alignment: BarChartAlignment.spaceEvenly,
+                        maxY: 8000,
+                        barTouchData: BarTouchData(
+                          touchTooltipData: BarTouchTooltipData(
+                            tooltipBorder: const BorderSide(color: Colors.blueGrey, width: 2),
+                            tooltipRoundedRadius: 8,
+                            tooltipPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            tooltipMargin: 16,
+                            tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+                            maxContentWidth: 120,
+                            getTooltipColor: (group) => Colors.grey.withOpacity(0.8),
+                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                              String year = group.x == 0 ? '2023' : '2024';
+                              return BarTooltipItem(
+                                '$year\n\$${rod.toY}',
+                                const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              );
+                            },
+                          ),
+                          touchCallback: (FlTouchEvent event, barTouchResponse) {
+                            setState(() {
+                              if (!event.isInterestedForInteractions ||
+                                  barTouchResponse == null ||
+                                  barTouchResponse.spot == null) {
+                                touchedIndex = -1;
+                                return;
+                              }
+                              touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
+                            });
                           },
                         ),
-                        touchCallback: (FlTouchEvent event, barTouchResponse) {
-                          setState(() {
-                            if (!event.isInterestedForInteractions ||
-                                barTouchResponse == null ||
-                                barTouchResponse.spot == null) {
-                              touchedIndex = -1;
-                              return;
-                            }
-                            touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
-                          });
-                        },
-                      ),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        rightTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
-                        ),
-                        topTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
-                        ),
-                        bottomTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 42,
-                            getTitlesWidget: (double value, TitleMeta meta) {
-                              // print('Value in getTitlesWidget: $value'); // Descomenta esto para depurar
-                              const style = TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              );
-                              String text;
-                              int intValue = value.round(); //  valor a entero
-                              if (intValue == 0) {
-                                text = HumanFormats.humanReadableNumber(7248.3); // Monto para 2023
-                              } else if (intValue == 1) {
-                                text = HumanFormats.humanReadableNumber(6746.06); // Monto para 2024
-                              } else {
-                                text = '';
-                              }
-                              return SideTitleWidget(
-                                axisSide: meta.axisSide,
-                                child: Text(text, style: style),
-                              );
-                            },
+                        titlesData: FlTitlesData(
+                          show: true,
+                          rightTitles: const AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                          topTitles: const AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 42,
+                              getTitlesWidget: (double value, TitleMeta meta) {
+                                const style = TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                );
+                                String text;
+                                int intValue = value.round(); //  valor a entero
+                                if (intValue == 0) {
+                                  text = HumanFormats.humanReadableNumber(7248.3); // Monto para 2023
+                                } else if (intValue == 1) {
+                                  text = HumanFormats.humanReadableNumber(6746.06); // Monto para 2024
+                                } else {
+                                  text = '';
+                                }
+                                return SideTitleWidget(
+                                  axisSide: meta.axisSide,
+                                  child: Text(text, style: style),
+                                );
+                              },
+                            ),
+                          ),
+                          leftTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 40,
+                              interval: 2000,
+                              getTitlesWidget: (double value, TitleMeta meta) {
+                                const style = TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                );
+                                return Text('\$${value.toStringAsFixed(0)}', style: style);
+                              },
+                            ),
                           ),
                         ),
-                        leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 40,
-                            interval: 2000, 
-                            getTitlesWidget: (double value, TitleMeta meta) {
-                              const style = TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              );
-                              return Text('\$${value.toStringAsFixed(0)}', style: style);
-                            },
-                          ),
+                        borderData: FlBorderData(
+                          show: false,
                         ),
+                        barGroups: barGroups,
+                        gridData: const FlGridData(show: false),
                       ),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      barGroups: barGroups,
-                      gridData: FlGridData(show: false),
                     ),
                   ),
                 ),
@@ -181,7 +184,6 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
     );
   }
 
-  
   BarChartGroupData makeGroupData(int x, double y, Color color) {
     return BarChartGroupData(
       x: x,
@@ -204,11 +206,11 @@ class Indicator extends StatelessWidget {
   final bool isSquare;
 
   const Indicator({
-    Key? key,
+    super.key,
     required this.color,
     required this.text,
     this.isSquare = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

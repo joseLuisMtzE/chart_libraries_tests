@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:chart_libraries_tests/helpers/zoomable_widget.dart';
+
 import '../../../fl_charts/resources/app_resources.dart';
 // import 'package:fl_chart_app/util/extensions/color_extensions.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -50,9 +52,13 @@ class BarChartSample1State extends State<BarsFlScreen> {
                   height: 32,
                 ),
                 Expanded(
-                  child: BarChart(
+                  child: ZoomableWidget(
+                    minScale: 1.0,
+                    maxScale: 4.0,
+                    child: BarChart(
                     randomData(),
                   ),
+                  )
                 ),
               ],
             ),
