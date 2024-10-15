@@ -1,7 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:chart_libraries_tests/helpers/human_formats.dart';
-import 'package:chart_libraries_tests/helpers/zoomable_widget.dart'; 
+import 'package:chart_libraries_tests/helpers/zoomable_widget.dart';
+
 class FlChartsZoomScreen extends StatefulWidget {
   const FlChartsZoomScreen({super.key});
 
@@ -36,50 +37,51 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
         appBar: AppBar(
           title: const Text('FL Charts Zoom'),
         ),
-        body: AspectRatio(
-          aspectRatio: 1.5,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const Text(
-                  'Importe por Año',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              const Text(
+                'Importe por Año',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Indicator(
+                    color: widget.year2023BarColor,
+                    text: '2023',
+                    isSquare: true,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Indicator(
-                      color: widget.year2023BarColor,
-                      text: '2023',
-                      isSquare: true,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Indicator(
-                      color: widget.year2024BarColor,
-                      text: '2024',
-                      isSquare: true,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: ZoomableWidget(
-                    minScale: 1.0,
-                    maxScale: 4.0,
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Indicator(
+                    color: widget.year2024BarColor,
+                    text: '2024',
+                    isSquare: true,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: ZoomableWidget(
+                  minScale: 1.0,
+                  maxScale: 4.0,
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 400, 
                     child: BarChart(
                       BarChartData(
                         alignment: BarChartAlignment.spaceEvenly,
@@ -176,8 +178,8 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

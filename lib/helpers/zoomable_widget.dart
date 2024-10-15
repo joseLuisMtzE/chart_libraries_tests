@@ -40,7 +40,9 @@ class ZoomableWidgetState extends State<ZoomableWidget> {
         scaleEnabled: true, // Permite hacer zoom
         minScale: widget.minScale, // Escala mínima permitida
         maxScale: widget.maxScale, // Escala máxima permitida
-        boundaryMargin: const EdgeInsets.all(16), // Margen adicional para permitir zoom fuera de los límites
+        boundaryMargin: const EdgeInsets.all(100), // Margen adicional para permitir zoom fuera de los límites
+        clipBehavior: Clip.none,
+        constrained: false,
         child: widget.child, // El widget hijo que será envuelto
       ),
     );
