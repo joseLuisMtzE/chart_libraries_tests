@@ -25,8 +25,10 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
     super.initState();
 
     // Crear dos grupos de barras, uno para cada año
-    final barGroup1 = makeGroupData(0, 7248.3, widget.year2023BarColor); // Datos para 2023
-    final barGroup2 = makeGroupData(1, 6746.06, widget.year2024BarColor); // Datos para 2024
+    final barGroup1 =
+        makeGroupData(0, 7248.3, widget.year2023BarColor); // Datos para 2023
+    final barGroup2 =
+        makeGroupData(1, 6746.06, widget.year2024BarColor); // Datos para 2024
     barGroups = [barGroup1, barGroup2];
   }
 
@@ -80,21 +82,25 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                   minScale: 1.0,
                   maxScale: 4.0,
                   child: SizedBox(
-                    width: double.infinity,
-                    height: 400, 
+                    width: MediaQuery.of(context).size.width,
+                    height: 400,
                     child: BarChart(
                       BarChartData(
                         alignment: BarChartAlignment.spaceEvenly,
                         maxY: 8000,
                         barTouchData: BarTouchData(
                           touchTooltipData: BarTouchTooltipData(
-                            tooltipBorder: const BorderSide(color: Colors.blueGrey, width: 2),
+                            tooltipBorder: const BorderSide(
+                                color: Colors.blueGrey, width: 2),
                             tooltipRoundedRadius: 8,
-                            tooltipPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            tooltipPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
                             tooltipMargin: 16,
-                            tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+                            tooltipHorizontalAlignment:
+                                FLHorizontalAlignment.center,
                             maxContentWidth: 120,
-                            getTooltipColor: (group) => Colors.grey.withOpacity(0.8),
+                            getTooltipColor: (group) =>
+                                Colors.grey.withOpacity(0.8),
                             getTooltipItem: (group, groupIndex, rod, rodIndex) {
                               String year = group.x == 0 ? '2023' : '2024';
                               return BarTooltipItem(
@@ -107,7 +113,8 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                               );
                             },
                           ),
-                          touchCallback: (FlTouchEvent event, barTouchResponse) {
+                          touchCallback:
+                              (FlTouchEvent event, barTouchResponse) {
                             setState(() {
                               if (!event.isInterestedForInteractions ||
                                   barTouchResponse == null ||
@@ -115,7 +122,8 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                                 touchedIndex = -1;
                                 return;
                               }
-                              touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
+                              touchedIndex =
+                                  barTouchResponse.spot!.touchedBarGroupIndex;
                             });
                           },
                         ),
@@ -140,9 +148,11 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                                 String text;
                                 int intValue = value.round(); //  valor a entero
                                 if (intValue == 0) {
-                                  text = HumanFormats.humanReadableNumber(7248.3); // Monto para 2023
+                                  text = HumanFormats.humanReadableNumber(
+                                      7248.3); // Monto para 2023
                                 } else if (intValue == 1) {
-                                  text = HumanFormats.humanReadableNumber(6746.06); // Monto para 2024
+                                  text = HumanFormats.humanReadableNumber(
+                                      6746.06); // Monto para 2024
                                 } else {
                                   text = '';
                                 }
@@ -164,7 +174,8 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
                                 );
-                                return Text('\$${value.toStringAsFixed(0)}', style: style);
+                                return Text('\$${value.toStringAsFixed(0)}',
+                                    style: style);
                               },
                             ),
                           ),
