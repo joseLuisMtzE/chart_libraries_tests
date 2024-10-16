@@ -37,7 +37,7 @@ class ZoomableWidgetState extends State<ZoomableWidget> {
       decoration: const BoxDecoration(),
       padding: const EdgeInsets.all(10),
       clipBehavior: Clip.hardEdge,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width - 50,
       height: 400,
       child: GestureDetector(
         onDoubleTap: _handleDoubleTap, // Restablecer zoom al hacer doble toque
