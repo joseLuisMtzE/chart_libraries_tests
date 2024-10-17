@@ -1,7 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:chart_libraries_tests/helpers/human_formats.dart';
-import 'package:chart_libraries_tests/helpers/zoomable_widget.dart'; 
+import 'package:chart_libraries_tests/helpers/zoomable_widget.dart';
+
 class FlChartsZoomScreen extends StatefulWidget {
   const FlChartsZoomScreen({super.key});
 
@@ -14,7 +15,7 @@ class FlChartsZoomScreen extends StatefulWidget {
 }
 
 class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
-  final double width = 20;
+  final double width = 60;
   int touchedIndex = -1;
 
   late List<BarChartGroupData> barGroups;
@@ -22,10 +23,11 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
   @override
   void initState() {
     super.initState();
-
     // Crear dos grupos de barras, uno para cada año
-    final barGroup1 = makeGroupData(0, 7248.3, widget.year2023BarColor); // Datos para 2023
-    final barGroup2 = makeGroupData(1, 6746.06, widget.year2024BarColor); // Datos para 2024
+    final barGroup1 =
+        makeGroupData(0, 7248.3, widget.year2023BarColor); // Datos para 2023
+    final barGroup2 =
+        makeGroupData(1, 4746.06, widget.year2024BarColor); // Datos para 2024
     barGroups = [barGroup1, barGroup2];
   }
 
@@ -36,148 +38,162 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
         appBar: AppBar(
           title: const Text('FL Charts Zoom'),
         ),
-        body: AspectRatio(
-          aspectRatio: 1.5,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const Text(
-                  'Importe por Año',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              const Text(
+                'Importe por Año',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Indicator(
+                    color: widget.year2023BarColor,
+                    text: '2023',
+                    isSquare: true,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Indicator(
-                      color: widget.year2023BarColor,
-                      text: '2023',
-                      isSquare: true,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Indicator(
-                      color: widget.year2024BarColor,
-                      text: '2024',
-                      isSquare: true,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: ZoomableWidget(
-                    minScale: 1.0,
-                    maxScale: 4.0,
-                    child: BarChart(
-                      BarChartData(
-                        alignment: BarChartAlignment.spaceEvenly,
-                        maxY: 8000,
-                        barTouchData: BarTouchData(
-                          touchTooltipData: BarTouchTooltipData(
-                            tooltipBorder: const BorderSide(color: Colors.blueGrey, width: 2),
-                            tooltipRoundedRadius: 8,
-                            tooltipPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            tooltipMargin: 16,
-                            tooltipHorizontalAlignment: FLHorizontalAlignment.center,
-                            maxContentWidth: 120,
-                            getTooltipColor: (group) => Colors.grey.withOpacity(0.8),
-                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                              String year = group.x == 0 ? '2023' : '2024';
-                              return BarTooltipItem(
-                                '$year\n\$${rod.toY}',
-                                const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Indicator(
+                    color: widget.year2024BarColor,
+                    text: '2024',
+                    isSquare: true,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ZoomableWidget(
+                minScale: 1.0,
+                maxScale: 4.0,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 50,
+                  height: 400,
+                  child: BarChart(
+                    BarChartData(
+                      alignment: BarChartAlignment.spaceEvenly,
+                      maxY: 8000,
+                      barTouchData: BarTouchData(
+                        touchTooltipData: BarTouchTooltipData(
+                          fitInsideVertically: true,
+                          fitInsideHorizontally: true,
+                          tooltipBorder: const BorderSide(
+                            color: Colors.blueGrey,
+                            width: 2,
+                          ),
+                          tooltipRoundedRadius: 8,
+                          tooltipPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          tooltipMargin: 16,
+                          tooltipHorizontalAlignment:
+                              FLHorizontalAlignment.center,
+                          maxContentWidth: 120,
+                          getTooltipColor: (group) =>
+                              Colors.grey.withOpacity(0.8),
+                          getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                            String year = group.x == 0 ? '2023' : '2024';
+                            return BarTooltipItem(
+                              '$year\n\$${rod.toY}',
+                              const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            );
+                          },
+                        ),
+                        touchCallback: (FlTouchEvent event, barTouchResponse) {
+                          setState(() {
+                            if (!event.isInterestedForInteractions ||
+                                barTouchResponse == null ||
+                                barTouchResponse.spot == null) {
+                              touchedIndex = -1;
+                              return;
+                            }
+                            touchedIndex =
+                                barTouchResponse.spot!.touchedBarGroupIndex;
+                          });
+                        },
+                      ),
+                      titlesData: FlTitlesData(
+                        show: true,
+                        rightTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        topTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 42,
+                            getTitlesWidget: (double value, TitleMeta meta) {
+                              const style = TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              );
+                              String text;
+                              int intValue = value.round(); //  valor a entero
+                              if (intValue == 0) {
+                                text = HumanFormats.humanReadableNumber(
+                                    7248.3); // Monto para 2023
+                              } else if (intValue == 1) {
+                                text = HumanFormats.humanReadableNumber(
+                                    6746.06); // Monto para 2024
+                              } else {
+                                text = '';
+                              }
+                              return SideTitleWidget(
+                                axisSide: meta.axisSide,
+                                child: Text(text, style: style),
                               );
                             },
                           ),
-                          touchCallback: (FlTouchEvent event, barTouchResponse) {
-                            setState(() {
-                              if (!event.isInterestedForInteractions ||
-                                  barTouchResponse == null ||
-                                  barTouchResponse.spot == null) {
-                                touchedIndex = -1;
-                                return;
-                              }
-                              touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
-                            });
-                          },
                         ),
-                        titlesData: FlTitlesData(
-                          show: true,
-                          rightTitles: const AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          topTitles: const AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              reservedSize: 42,
-                              getTitlesWidget: (double value, TitleMeta meta) {
-                                const style = TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                );
-                                String text;
-                                int intValue = value.round(); //  valor a entero
-                                if (intValue == 0) {
-                                  text = HumanFormats.humanReadableNumber(7248.3); // Monto para 2023
-                                } else if (intValue == 1) {
-                                  text = HumanFormats.humanReadableNumber(6746.06); // Monto para 2024
-                                } else {
-                                  text = '';
-                                }
-                                return SideTitleWidget(
-                                  axisSide: meta.axisSide,
-                                  child: Text(text, style: style),
-                                );
-                              },
-                            ),
-                          ),
-                          leftTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              reservedSize: 40,
-                              interval: 2000,
-                              getTitlesWidget: (double value, TitleMeta meta) {
-                                const style = TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                );
-                                return Text('\$${value.toStringAsFixed(0)}', style: style);
-                              },
-                            ),
+                        leftTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 40,
+                            interval: 2000,
+                            getTitlesWidget: (double value, TitleMeta meta) {
+                              const style = TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              );
+                              return Text('\$${value.toStringAsFixed(0)}',
+                                  style: style);
+                            },
                           ),
                         ),
-                        borderData: FlBorderData(
-                          show: false,
-                        ),
-                        barGroups: barGroups,
-                        gridData: const FlGridData(show: false),
+                      ),
+                      borderData: FlBorderData(
+                        show: false,
+                      ),
+                      barGroups: barGroups,
+                      gridData: const FlGridData(
+                        show: true,
+                        drawVerticalLine: false,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -192,7 +208,8 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
           toY: y,
           color: color,
           width: width,
-          borderRadius: BorderRadius.zero,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4), topRight: Radius.circular(4)),
         ),
       ],
     );
