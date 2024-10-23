@@ -24,10 +24,8 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
   void initState() {
     super.initState();
     // Crear dos grupos de barras, uno para cada año
-    final barGroup1 =
-        makeGroupData(0, 7248.3, widget.year2023BarColor); // Datos para 2023
-    final barGroup2 =
-        makeGroupData(1, 4746.06, widget.year2024BarColor); // Datos para 2024
+    final barGroup1 = makeGroupData(0, 7248.3, widget.year2023BarColor); // Datos para 2023
+    final barGroup2 = makeGroupData(1, 4746.06, widget.year2024BarColor); // Datos para 2024
     barGroups = [barGroup1, barGroup2];
   }
 
@@ -78,10 +76,10 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
               ),
               ZoomableWidget(
                 minScale: 1.0,
-                maxScale: 4.0,
+                maxScale: 3.0,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 50,
-                  height: 400,
+                  height: 500,
                   child: BarChart(
                     BarChartData(
                       alignment: BarChartAlignment.spaceEvenly,
@@ -97,12 +95,10 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                           tooltipRoundedRadius: 8,
                           tooltipPadding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 8),
-                          tooltipMargin: 16,
-                          tooltipHorizontalAlignment:
-                              FLHorizontalAlignment.center,
-                          maxContentWidth: 120,
-                          getTooltipColor: (group) =>
-                              Colors.grey.withOpacity(0.8),
+                          tooltipMargin: 8,
+                          tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+                          maxContentWidth: 100,
+                          getTooltipColor: (group) => Colors.grey.withOpacity(0.8),
                           getTooltipItem: (group, groupIndex, rod, rodIndex) {
                             String year = group.x == 0 ? '2023' : '2024';
                             return BarTooltipItem(
@@ -110,7 +106,7 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                               const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             );
                           },
@@ -123,8 +119,7 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                               touchedIndex = -1;
                               return;
                             }
-                            touchedIndex =
-                                barTouchResponse.spot!.touchedBarGroupIndex;
+                            touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
                           });
                         },
                       ),
@@ -147,13 +142,11 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                                 fontSize: 14,
                               );
                               String text;
-                              int intValue = value.round(); //  valor a entero
+                              int intValue = value.round();
                               if (intValue == 0) {
-                                text = HumanFormats.humanReadableNumber(
-                                    7248.3); // Monto para 2023
+                                text = HumanFormats.humanReadableNumber(7248.3);
                               } else if (intValue == 1) {
-                                text = HumanFormats.humanReadableNumber(
-                                    6746.06); // Monto para 2024
+                                text = HumanFormats.humanReadableNumber(6746.06);
                               } else {
                                 text = '';
                               }
@@ -175,8 +168,7 @@ class _FlChartsZoomScreenState extends State<FlChartsZoomScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
                               );
-                              return Text('\$${value.toStringAsFixed(0)}',
-                                  style: style);
+                              return Text('\$${value.toStringAsFixed(0)}', style: style);
                             },
                           ),
                         ),

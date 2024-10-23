@@ -5,7 +5,7 @@ class ZoomableWidget extends StatefulWidget {
     super.key,
     required this.child,
     this.minScale = 1.0,
-    this.maxScale = 4.0,
+    this.maxScale = 2.0,
   });
 
   final Widget child;
@@ -33,25 +33,21 @@ class ZoomableWidgetState extends State<ZoomableWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(),
-      padding: const EdgeInsets.all(10),
-      clipBehavior: Clip.hardEdge,
-      width: MediaQuery.of(context).size.width - 50,
+    return SizedBox(
       height: 400,
+      width: double.infinity,
       child: GestureDetector(
-        onDoubleTap: _handleDoubleTap, // Restablecer zoom al hacer doble toque
+        onDoubleTap: _handleDoubleTap,
         child: InteractiveViewer(
           transformationController: _transformationController,
-          panEnabled: true, // Permite desplazar el contenido
-          scaleEnabled: true, // Permite hacer zoom
-          minScale: widget.minScale, // Escala mínima permitida
-          maxScale: widget.maxScale, // Escala máxima permitida
-          boundaryMargin: const EdgeInsets.all(
-              100), // Margen adicional para permitir zoom fuera de los límites
+          panEnabled: true,
+          scaleEnabled: true,
+          minScale: widget.minScale,
+          maxScale: widget.maxScale,
+          boundaryMargin: const EdgeInsets.all(100), // Ajusta el margen para mayor desplazamiento
           clipBehavior: Clip.none,
-          constrained: false,
-          child: widget.child, // El widget hijo que será envuelto
+          constrained: false, 
+          child: widget.child,
         ),
       ),
     );

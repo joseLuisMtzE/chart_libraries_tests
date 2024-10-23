@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:chart_libraries_tests/helpers/zoomable_widget.dart';
 
 class LinealCustomScreen extends StatelessWidget {
   const LinealCustomScreen({super.key});
@@ -11,16 +12,17 @@ class LinealCustomScreen extends StatelessWidget {
         title: const Text("Custom Lineal chart"),
       ),
       body: const Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(),
-          _Legends(),
-          SizedBox(),
-          _ChartView(),
-        ],
-      )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(),
+            _Legends(),
+            SizedBox(),
+            _ChartView(),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -39,22 +41,16 @@ class _Legends extends StatelessWidget {
           height: 12,
           decoration: BoxDecoration(color: Colors.purple.shade400),
         ),
-        SizedBox(
-          width: 4,
-        ),
-        Text("Semana Actual"),
-        SizedBox(
-          width: 16,
-        ),
+        const SizedBox(width: 4),
+        const Text("Semana Actual"),
+        const SizedBox(width: 16),
         Container(
           width: 12,
           height: 12,
           decoration: BoxDecoration(color: Colors.teal.shade400),
         ),
-        SizedBox(
-          width: 4,
-        ),
-        Text("Semana anterior"),
+        const SizedBox(width: 4),
+        const Text("Semana anterior"),
       ],
     );
   }
@@ -67,26 +63,31 @@ class _ChartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, right: 20, left: 10),
-      child: SizedBox(
-        height: 250,
-        width: double.infinity,
-        child: LineChart(LineChartData(
-          lineTouchData: lineTouchData,
-          gridData: const FlGridData(show: false),
-          titlesData: titlesData,
-          borderData: borderData,
-          lineBarsData: lineBarsData2,
-          minX: 0,
-          maxX: 100,
-          maxY: 100,
-          minY: 0,
-        )),
+      child: ZoomableWidget(
+        minScale: 1.0,
+        maxScale: 3.0,
+        child: SizedBox(
+          height: 500,
+          width: MediaQuery.of(context).size.width - 20,
+          child: LineChart(
+            LineChartData(
+              lineTouchData: lineTouchData,
+              gridData: const FlGridData(show: false),
+              titlesData: titlesData,
+              borderData: borderData,
+              lineBarsData: lineBarsData2,
+              minX: 0,
+              maxX: 100,
+              maxY: 100,
+              minY: 0,
+            ),
+          ),
+        ),
       ),
     );
   }
 
   LineTouchData get lineTouchData => LineTouchData(
-        // enabled: false,
         touchTooltipData: LineTouchTooltipData(
           getTooltipColor: (touchedSpot) => Colors.grey.withOpacity(.05),
         ),
@@ -109,7 +110,7 @@ class _ChartView extends StatelessWidget {
 
   SideTitles get bottomTitles => SideTitles(
         showTitles: true,
-        reservedSize: 32,
+        reservedSize: 50,
         interval: 1,
         getTitlesWidget: bottomTitleWidgets,
       );
@@ -118,7 +119,7 @@ class _ChartView extends StatelessWidget {
         getTitlesWidget: leftTitleWidgets,
         showTitles: true,
         interval: 1,
-        reservedSize: 35,
+        reservedSize: 50,
       );
 
   FlBorderData get borderData => FlBorderData(
@@ -238,7 +239,6 @@ class _ChartView extends StatelessWidget {
       case 0:
         text = '0';
         break;
-
       case 20:
         text = '20';
         break;
@@ -257,7 +257,6 @@ class _ChartView extends StatelessWidget {
       case 100:
         text = '100';
         break;
-
       default:
         text = '';
         break;
