@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class GraphicScreen extends StatelessWidget {
+  const GraphicScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<Map<String, String>> data = [
-      {"title": "FL Charts", 'route': '/fl-charts'},
-      {"title": "FL Charts zoom", 'route': '/fl-charts-zoom'},
-      {"title": "Graphic Charts", 'route': '/graphic'},
+      // {"title": "Lineal", 'route': '/graphic-linel'},
+      {"title": "Circular", 'route': '/graphic-circular'},
+      {"title": "Bar", 'route': '/graphic-bar'},
     ];
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
-        title: const Text("Charts test",
+        title: const Text("Graphic",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       backgroundColor: Colors.white,

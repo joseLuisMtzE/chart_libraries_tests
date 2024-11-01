@@ -4,6 +4,11 @@ import 'package:chart_libraries_tests/presentation/screens/fl_charts/custom/circ
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/custom/lineal_custom_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts/fl_charts_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/fl_charts_zoom/bars_fl_screen_zoom.dart';
+import 'package:chart_libraries_tests/presentation/screens/graphic/animation_graphic_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/graphic/bar_graphic_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/graphic/circular_graphic_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/graphic/line_area_point.dart.dart';
+import 'package:chart_libraries_tests/presentation/screens/graphic/graphic_screen.dart';
 import '../../presentation/screens/fl_charts/lineal_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -33,16 +38,30 @@ final appRouter = GoRouter(
       builder: (context, state) => BarsFlScreen(),
     ),
     GoRoute(
-    path: '/fl-charts-zoom',
-    builder: (context, state) =>  FlChartsZoomScreen(),
+      path: '/fl-charts-zoom',
+      builder: (context, state) => const FlChartsZoomScreen(),
     ),
     GoRoute(
       path: '/custom-lineal',
-      builder: (context, state) => LinealCustomScreen(),
+      builder: (context, state) => const LinealCustomScreen(),
     ),
     GoRoute(
       path: '/custom-circular',
-      builder: (context, state) => CircularCustomScreen(),
+      builder: (context, state) => const CircularCustomScreen(),
+    ),
+
+    //? Graphic charts lib routes
+    GoRoute(
+      path: '/graphic',
+      builder: (context, state) => const GraphicScreen(),
+    ),
+    GoRoute(
+      path: '/graphic-circular',
+      builder: (context, state) => const CircularGraphicScreen(),
+    ),
+    GoRoute(
+      path: '/graphic-bar',
+      builder: (context, state) => const BarGraphicScreen(),
     ),
   ],
 );
