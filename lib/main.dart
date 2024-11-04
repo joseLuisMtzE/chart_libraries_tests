@@ -1,4 +1,5 @@
 import 'package:chart_libraries_tests/config/router/app_router.dart';
+import 'package:chart_libraries_tests/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,13 +13,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: appRouter,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFFFF8623),
-          ).copyWith(
-            primary: const Color(0xFFFF8623), // Asigna el color específico
-          ),
-          useMaterial3: false),
+      theme: AppTheme().getTheme(),
     );
   }
 }

@@ -21,3 +21,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    # create '.env' file from '.env.template' and uncomment the following line
+    # - .env
+    - assets/
+
+  fonts:
+    - family: Sora
+      fonts:
+        - asset: assets/fonts/Sora-Bold.ttf
+        - asset: assets/fonts/Sora-ExtraBold.ttf
+        - asset: assets/fonts/Sora-ExtraLight.ttf
+        - asset: assets/fonts/Sora-Light.ttf
+        - asset: assets/fonts/Sora-Medium.ttf
+        - asset: assets/fonts/Sora-Regular.ttf
+        - asset: assets/fonts/Sora-SemiBold.ttf
+        - asset: assets/fonts/Sora-Thin.ttf
