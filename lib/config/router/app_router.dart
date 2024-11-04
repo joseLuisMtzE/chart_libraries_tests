@@ -9,6 +9,7 @@ import 'package:chart_libraries_tests/presentation/screens/graphic/bar_graphic_s
 import 'package:chart_libraries_tests/presentation/screens/graphic/circular_graphic_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/graphic/line_area_point.dart.dart';
 import 'package:chart_libraries_tests/presentation/screens/graphic/graphic_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/msp_charts/msp_charts_screen.dart';
 import '../../presentation/screens/fl_charts/lineal_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +62,12 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/graphic-bar',
-      builder: (context, state) => const BarGraphicScreen(),
+      builder: (context, state) => LineAreaPointPage(),
+    ),
+
+    GoRoute(
+      path: '/msp',
+      builder: (context, state) => const MspChartsScreen(),
     ),
   ],
 );

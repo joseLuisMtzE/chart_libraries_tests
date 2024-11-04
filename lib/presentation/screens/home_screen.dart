@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
       {"title": "FL Charts", 'route': '/fl-charts'},
       {"title": "FL Charts zoom", 'route': '/fl-charts-zoom'},
       {"title": "Graphic Charts", 'route': '/graphic'},
+      {"title": "Microsip Charts", 'route': '/msp'},
     ];
 
     return Scaffold(
