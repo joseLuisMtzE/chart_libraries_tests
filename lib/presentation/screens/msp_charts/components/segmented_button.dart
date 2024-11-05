@@ -1,4 +1,4 @@
-import 'package:chart_libraries_tests/presentation/screens/msp_charts/msp_charts_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/msp_charts/screens/linear_chart_screen.dart';
 import 'package:flutter/material.dart';
 
 class CalendarSegmentedButton extends StatelessWidget {
@@ -16,6 +16,8 @@ class CalendarSegmentedButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return SegmentedButton<Calendar>(
       style: ButtonStyle(
+        textStyle: const WidgetStatePropertyAll(TextStyle(fontSize: 13)),
+        visualDensity: VisualDensity.compact,
         shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         side: WidgetStatePropertyAll(BorderSide(

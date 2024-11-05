@@ -10,6 +10,7 @@ import 'package:chart_libraries_tests/presentation/screens/graphic/circular_grap
 import 'package:chart_libraries_tests/presentation/screens/graphic/line_area_point.dart.dart';
 import 'package:chart_libraries_tests/presentation/screens/graphic/graphic_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/msp_charts/msp_charts_screen.dart';
+import 'package:chart_libraries_tests/presentation/screens/msp_charts/screens/linear_chart_screen.dart';
 import '../../presentation/screens/fl_charts/lineal_fl_screen.dart';
 import 'package:chart_libraries_tests/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -65,9 +66,14 @@ final appRouter = GoRouter(
       builder: (context, state) => LineAreaPointPage(),
     ),
 
+//? EJEMPLOS ADHOC DISENO
     GoRoute(
       path: '/msp',
       builder: (context, state) => const MspChartsScreen(),
+    ),
+    GoRoute(
+      path: '/linear',
+      builder: (context, state) => const LinearChartScreen(),
     ),
   ],
 );
