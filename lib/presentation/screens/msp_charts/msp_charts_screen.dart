@@ -41,7 +41,7 @@ class _MspChartsScreenState extends State<MspChartsScreen> {
                 "Utilidades",
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _LinealChartView(
@@ -76,7 +76,7 @@ class _LinealChartView extends StatelessWidget {
             calendarView: calendarView,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 48),
             child: CalendarSegmentedButton(
               selectedCalendar: calendarView,
               onSelectionChanged: onCalendarChanged,
@@ -178,7 +178,6 @@ class LinealChart extends StatelessWidget {
             ),
           ),
           PointMark(
-            // Añade un marcador de puntos para cada dato
             position: Varset('day') * Varset('value') / Varset('group'),
             color: ColorEncode(
               variable: 'group',
@@ -191,11 +190,10 @@ class LinealChart extends StatelessWidget {
               value: CircleShape(hollow: false, strokeWidth: 2),
             ),
             size: SizeEncode(
-              value: 9, // Ajusta el tamaño de los puntos
+              value: 9,
             ),
           ),
           PointMark(
-            // Añade un marcador de puntos para cada dato
             position: Varset('day') * Varset('value') / Varset('group'),
             color: ColorEncode(
               variable: 'group',
@@ -208,7 +206,7 @@ class LinealChart extends StatelessWidget {
               value: CircleShape(hollow: false, strokeWidth: 2),
             ),
             size: SizeEncode(
-              value: 5, // Ajusta el tamaño de los puntos
+              value: 5,
             ),
           ),
         ],
@@ -249,7 +247,54 @@ class LinealChart extends StatelessWidget {
           followPointer: [false, true],
           offset: const Offset(-5, -15),
           align: Alignment.topLeft,
-          variables: ['group', 'value'],
+          variables: [
+            'group',
+            'value',
+          ],
+          // renderer: (size, anchor, selectedTuples) {
+          //   final line1 = selectedTuples.values.first;
+          //   final line2 = selectedTuples.values.last;
+          //   final Offset offset = Offset(anchor.dx - 25, anchor.dy - 30);
+          //   final elements = <MarkElement>[
+          //     GroupElement(
+          //       elements: [
+          //         RectElement(
+          //           borderRadius: BorderRadius.circular(4),
+          //           style: PaintStyle(
+          //             fillColor: Colors.grey.shade300,
+          //           ),
+          //           rect: Rect.fromCenter(
+          //               center: offset, width: 90, height: 55),
+          //         ),
+          //         LabelElement(
+          //           text:
+          //               "${selectedTuples.values.first["day"]}", // Texto de ejemplo usando el día
+          //           anchor: Offset(offset.dx, offset.dy - 14),
+          //           style: LabelStyle(
+          //             textStyle: TextStyle(color: color1, fontSize: 14),
+          //           ),
+          //         ),
+          //         LabelElement(
+          //           defaultAlign: Alignment.centerLeft,
+          //           text: "${line1["group"]}: \$${line1["value"]}",
+          //           anchor: Offset(offset.dx, offset.dy + 5),
+          //           style: LabelStyle(
+          //               textStyle: TextStyle(color: color2, fontSize: 11),
+          //               textAlign: TextAlign.start),
+          //         ),
+          //         LabelElement(
+          //           defaultAlign: Alignment.centerLeft,
+          //           text: "${line2["group"]}: \$${line2["value"]}",
+          //           anchor: Offset(offset.dx, offset.dy + 20),
+          //           style: LabelStyle(
+          //               textStyle: TextStyle(color: color2, fontSize: 11),
+          //               textAlign: TextAlign.start),
+          //         ),
+          //       ],
+          //     )
+          //   ];
+          //   return elements;
+          // }),
         ),
         crosshair: CrosshairGuide(
           followPointer: [false, true],
@@ -273,15 +318,15 @@ const dataPerWeek = [
   {'day': 'Miercoles', 'value': 3500, 'group': 'Actual'},
   {'day': 'Jueves', 'value': 6000, 'group': 'Actual'},
   {'day': 'Viernes', 'value': 7500, 'group': 'Actual'},
-  {'day': 'Sabado', 'value': 9500, 'group': 'Actual'},
-  {'day': 'Domingo', 'value': 10000, 'group': 'Actual'},
-  {'day': 'Lunes', 'value': 5500, 'group': 'Anterior'},
-  {'day': 'Martes', 'value': 500, 'group': 'Anterior'},
-  {'day': 'Miercoles', 'value': 2500, 'group': 'Anterior'},
-  {'day': 'Jueves', 'value': 5500, 'group': 'Anterior'},
-  {'day': 'Viernes', 'value': 4000, 'group': 'Anterior'},
-  {'day': 'Sabado', 'value': 1000, 'group': 'Anterior'},
-  {'day': 'Domingo', 'value': 3000, 'group': 'Anterior'},
+  // {'day': 'Sabado', 'value': 9500, 'group': 'Actual'},
+  // {'day': 'Domingo', 'value': 10000, 'group': 'Actual'},
+  // {'day': 'Lunes', 'value': 5500, 'group': 'Anterior'},
+  // {'day': 'Martes', 'value': 500, 'group': 'Anterior'},
+  // {'day': 'Miercoles', 'value': 2500, 'group': 'Anterior'},
+  // {'day': 'Jueves', 'value': 5500, 'group': 'Anterior'},
+  // {'day': 'Viernes', 'value': 4000, 'group': 'Anterior'},
+  // {'day': 'Sabado', 'value': 1000, 'group': 'Anterior'},
+  // {'day': 'Domingo', 'value': 3000, 'group': 'Anterior'},
 ];
 const dataPerMonth = [
   {'day': 'S1', 'value': 10, 'group': 'Mes actual'},
