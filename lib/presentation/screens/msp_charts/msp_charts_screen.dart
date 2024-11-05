@@ -61,6 +61,8 @@ class _LinealChartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color1 = const Color(0xFFFF8623);
+    final color2 = const Color(0xff202427);
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -72,11 +74,34 @@ class _LinealChartView extends StatelessWidget {
           const _LabelTextChart(
             label: "1 Agosto 2024 | 11:00 hrs",
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: {
+                'Actual': color1,
+                'Anterior': color2,
+              }.entries.map((entry) {
+                return Row(
+                  children: [
+                    Container(
+                      width: 16,
+                      height: 16,
+                      color: entry.value,
+                    ),
+                    SizedBox(width: 4),
+                    Text(entry.key),
+                    SizedBox(width: 16),
+                  ],
+                );
+              }).toList(),
+            ),
+          ),
           LinealChart(
             calendarView: calendarView,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 48),
+            padding: const EdgeInsets.only(bottom: 40, top: 48),
             child: CalendarSegmentedButton(
               selectedCalendar: calendarView,
               onSelectionChanged: onCalendarChanged,
@@ -318,15 +343,15 @@ const dataPerWeek = [
   {'day': 'Miercoles', 'value': 3500, 'group': 'Actual'},
   {'day': 'Jueves', 'value': 6000, 'group': 'Actual'},
   {'day': 'Viernes', 'value': 7500, 'group': 'Actual'},
-  // {'day': 'Sabado', 'value': 9500, 'group': 'Actual'},
-  // {'day': 'Domingo', 'value': 10000, 'group': 'Actual'},
-  // {'day': 'Lunes', 'value': 5500, 'group': 'Anterior'},
-  // {'day': 'Martes', 'value': 500, 'group': 'Anterior'},
-  // {'day': 'Miercoles', 'value': 2500, 'group': 'Anterior'},
-  // {'day': 'Jueves', 'value': 5500, 'group': 'Anterior'},
-  // {'day': 'Viernes', 'value': 4000, 'group': 'Anterior'},
-  // {'day': 'Sabado', 'value': 1000, 'group': 'Anterior'},
-  // {'day': 'Domingo', 'value': 3000, 'group': 'Anterior'},
+  {'day': 'Sabado', 'value': 9500, 'group': 'Actual'},
+  {'day': 'Domingo', 'value': 10000, 'group': 'Actual'},
+  {'day': 'Lunes', 'value': 5500, 'group': 'Anterior'},
+  {'day': 'Martes', 'value': 500, 'group': 'Anterior'},
+  {'day': 'Miercoles', 'value': 2500, 'group': 'Anterior'},
+  {'day': 'Jueves', 'value': 5500, 'group': 'Anterior'},
+  {'day': 'Viernes', 'value': 4000, 'group': 'Anterior'},
+  {'day': 'Sabado', 'value': 1000, 'group': 'Anterior'},
+  {'day': 'Domingo', 'value': 3000, 'group': 'Anterior'},
 ];
 const dataPerMonth = [
   {'day': 'S1', 'value': 10, 'group': 'Mes actual'},

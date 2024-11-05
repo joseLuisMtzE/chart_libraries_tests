@@ -6,10 +6,10 @@ class CalendarSegmentedButton extends StatelessWidget {
   final ValueChanged<Calendar> onSelectionChanged;
 
   const CalendarSegmentedButton({
-    Key? key,
+    super.key,
     required this.selectedCalendar,
     required this.onSelectionChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
